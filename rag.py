@@ -2,7 +2,8 @@ import os
 import re
 import chromadb
 
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
+# from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -35,7 +36,8 @@ client = OpenAI(
 # -----------------------------
 
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-
+# Same model (all-MiniLM-L6-v2), but run through ONNX instead of PyTorch.
+# embedding_model = DefaultEmbeddingFunction()
 
 # -----------------------------
 # ChromaDB
@@ -122,6 +124,10 @@ def chunk_document(text, filename=""):
 def create_embedding(text):
 
     return embedding_model.encode(text).tolist()
+
+# def create_embedding(text):
+
+#     return [float(x) for x in embedding_model([text])[0]]
 
 
 # -----------------------------
