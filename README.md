@@ -110,42 +110,4 @@ pip install -r requirements.txt
 
 ## Environment Variables
 
-If the application requires API keys, create a `.env` file in the project root and add the required credentials.
-
-**Do not upload `.env` or API keys to GitHub.**
-
-## Run the Application
-
-Start the Streamlit application:
-
-```powershell
-streamlit run app.py
-```
-
-Then open the local URL provided by Streamlit in your browser.
-
-## Testing
-
-The project includes separate test files for different components.
-
-For example:
-
-```powershell
-python test_rag.py
-```
-
-```powershell
-python test_ticket_intelligence.py
-```
-
-```powershell
-python test_escalation.py
-```
-
-## Project Status
-
-This project is currently under development. The system is being expanded with additional ticket intelligence, RAG capabilities, automation, and IT support features.
-
-## Repository
-
-GitHub: https://github.com/Criminals226/ai-it-support
+If the application requires API keys, create a `.env` file i

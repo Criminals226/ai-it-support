@@ -124,3 +124,50 @@ def update_ticket_status(
 
     connection.commit()
     connection.close()
+
+
+# -----------------------------
+# Delete Tickets (only RESOLVED ones can ever be deleted)
+# -----------------------------
+
+def delete_ticket(ticket_id):
+    """
+    Deletes ONE ticket, but only if its status is Resolved.
+    Returns True if a ticket was deleted, otherwise False.
+    """
+
+    connection = sqlite3.connect(DB_PATH)
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        DELETE FROM tickets
+        WHERE id = ? AND status = 'Resolved'
+    """, (ticket_id,))
+
+    deleted = cursor.rowcount
+
+    connection.commit()
+    connection.close()
+
+    return deleted > 0
+
+
+def delete_resolved_tickets():
+    """
+    Deletes ALL resolved tickets. Open and In Progress tickets are never touched.
+    Returns how many tickets were deleted.
+    """
+
+    connection = sqlite3.connect(DB_PATH)
+
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM tickets WHERE status = 'Resolved'")
+
+    deleted = cursor.rowcount
+
+    connection.commit()
+    connection.close()
+
+    return deleted
